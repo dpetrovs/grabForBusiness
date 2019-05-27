@@ -19,12 +19,6 @@ Feature: Home Page
       |GRAB_PAY_CREDIT|
       |ALL|
 
-  Scenario: Verify Corporate Credit Card and Employee Group QA filters functionality
-    Given user select "CORPORATE_CREDIT_CARD" from Payment Method list
-    And user select "QA" from employee list
-    Then Payment Method "CORPORATE_CREDIT_CARD" is selected
-    And Employee Group "QA" is selected
-
   Scenario: Verify Cash and Employee Group QA filters functionality
     Given user select "CASH" from Payment Method list
     And user select "QA" from employee list
