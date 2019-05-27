@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -29,7 +27,7 @@ public class WebDriverConfiguration {
         return getProperties().getProperty("web.ui.password");
     }
 
-    public WebDriver getDriver() {
+    protected WebDriver getDriver() {
         return driver;
     }
 
@@ -41,7 +39,7 @@ public class WebDriverConfiguration {
         return PASSWORD;
     }
 
-    public void webDriverSelection() {
+    protected void webDriverSelection() {
         switch (getProperties().getProperty("sys.selenium.browser")){
             case "firefox" :
                 setFireFoxPath();
@@ -91,7 +89,7 @@ public class WebDriverConfiguration {
         }
     }
 
-    protected Properties getProperties() {
+    private Properties getProperties() {
         Properties properties = new Properties();
         try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("application.properties")) {
             properties.load(resourceAsStream);

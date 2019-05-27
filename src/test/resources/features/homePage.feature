@@ -26,3 +26,10 @@ Feature: Home Page
     And Employee Group "QA" is selected
     And trips with Payment Method "CASH" are shown in trips table
     And trips with Employee Group "QA" are shown in trips table
+
+  Scenario: Verify Corporate Credit Card and Employee Group QA filters functionality
+    Given user select "CORPORATE_CREDIT_CARD" from Payment Method list
+    And user select "QA" from employee list
+    Then Payment Method "CORPORATE_CREDIT_CARD" is selected
+    And Employee Group "QA" is selected
+    And trips table list is empty

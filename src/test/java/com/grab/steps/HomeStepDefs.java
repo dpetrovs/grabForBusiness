@@ -7,7 +7,6 @@ import com.grab.enums.HomePageTabs;
 import com.grab.enums.PaymentMethodItems;
 import com.grab.pageObjects.HomePage;
 import com.grab.pageObjects.LoginPage;
-import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -79,5 +78,10 @@ public class HomeStepDefs extends WebDriverConfiguration{
     @And("^trips with Payment Method \"([^\"]*)\" are shown in trips table$")
     public void tripsWithPaymentMethodAreShownInTripsTable(PaymentMethodItems item) {
         homePage.checkPaymentMethodInMyTripsTable(item);
+    }
+
+    @And("^trips table list is empty$")
+    public void tripsTableListIsEmpty() {
+        homePage.isTripsTableEmpty();
     }
 }

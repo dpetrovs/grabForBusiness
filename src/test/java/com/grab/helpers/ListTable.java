@@ -14,15 +14,15 @@ public class ListTable {
         this.webElement = webElement;
     }
 
-    public List<String> getHeaders() {
+    private List<String> getHeaders() {
         return webElement.findElements(By.xpath("//thead/tr/th")).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public int rowsCount() {
+    private int rowsCount() {
         return webElement.findElements(By.xpath("//tbody/tr")).size();
     }
 
-    public List<String> getRow(int rowNumber) {
+    private List<String> getRow(int rowNumber) {
         return webElement.findElements(By.xpath("//tbody/tr[" + (rowNumber + 1) +"]/td")).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 

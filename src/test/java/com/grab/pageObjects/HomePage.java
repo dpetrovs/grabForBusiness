@@ -60,7 +60,6 @@ public class HomePage extends Page{
     @FindBy(xpath = "//div[@class='TripList__tripTable___2Jl_l']/descendant::table")
     private WebElement tripsTable;
 
-
     public void selectEmployeeGroupMenuItem(EmployeeGroupItems item) {
         employeeGroupDropDown.click();
         switch (item){
@@ -169,12 +168,15 @@ public class HomePage extends Page{
         return new ListTable(tripsTable);
     }
 
-    public Multimap<String, String> getTableDataGroupedByColumn() {
+    private Multimap<String, String> getTableDataGroupedByColumn() {
         return getListTable().getDataGroupedByColumn();
     }
 
     public void checkEmployeeGroupInMyTripsTable(EmployeeGroupItems searchField) {
         Multimap<String, String> tableList = getTableDataGroupedByColumn();
+        if (tableList.isEmpty()){
+            Assert.assertTrue("Table list is empty", false);
+        }
         if (searchField.equals(EmployeeGroupItems.QA)) {
             for (String value: tableList.get("Employee Group")) {
                 Assert.assertEquals("Qa", value);
@@ -190,25 +192,33 @@ public class HomePage extends Page{
 
     public void checkPaymentMethodInMyTripsTable(PaymentMethodItems searchField) {
         Multimap<String, String> tableList = getTableDataGroupedByColumn();
+        if (tableList.isEmpty()){
+            Assert.assertTrue("Table list is empty", false);
+        }
         if (searchField.equals(PaymentMethodItems.CASH)) {
             for (String value: tableList.get("Payment Method")) {
-                Assert.assertTrue(value.contains("Cash1"));
+                Assert.assertEquals("Cash",value);
             }
         } else if (searchField.equals(PaymentMethodItems.CORPORATE_BILLING)) {
             for (String value: tableList.get("Payment Method")) {
-                Assert.assertTrue(value.contains("Corporate Billing"));
+                Assert.assertEquals("Corporate Billing",value);
             }
         } else if (searchField.equals(PaymentMethodItems.CORPORATE_CREDIT_CARD)) {
             for (String value: tableList.get("Payment Method")) {
-                Assert.assertTrue(value.contains("Corporate Credit Card"));
+                Assert.assertEquals("Corporate Credit Card",value);
             }
         } else if (searchField.equals(PaymentMethodItems.GRAB_PAY_CREDIT)) {
             for (String value : tableList.get("Payment Method")) {
-                Assert.assertTrue(value.contains("GrabPay / Credit"));
+                Assert.assertEquals("GrabPay / Credit",value);
             }
         }  else {
             Assert.assertTrue("Incorrect Payment Method inserted", false);
         }
+    }
+
+    public void isTripsTableEmpty(){
+        Multimap<String, String> tableList = getTableDataGroupedByColumn();
+        Assert.assertTrue("Table list is empty.", tableList.isEmpty());
     }
 
     private void waitTableSpinnerLoaded() {

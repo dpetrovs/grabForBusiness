@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Page  extends WebDriverConfiguration{
 
-    public WebDriverWait waiter(WebDriver webDriver) {
+    WebDriverWait waiter(WebDriver webDriver) {
         return new WebDriverWait(webDriver, 10);
     }
     void init (WebDriver driver) {
